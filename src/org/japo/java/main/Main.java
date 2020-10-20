@@ -24,39 +24,42 @@ import java.util.Scanner;
  */
 public class Main {
 
+    // Objeto Scanner
+    public static final Scanner SCN
+            = new Scanner(System.in, "Windows-1252")
+                    .useLocale(Locale.ENGLISH).useDelimiter("\\s+");
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // Objeto Scanner
-        Scanner scn = new Scanner(System.in);
-        scn.useLocale(Locale.ENGLISH);
-
-        // Variables
-        double importeCena;
-        int numAmigos;
-        double pagoPersona;
-
+        // Importe de la cena
+        double importeCena = 0;
         try {
-            // Importe Cena
-            System.out.print("Importe cena (€) ..: ");
-            importeCena = scn.nextDouble();
-            scn.nextLine();
-
-            // Número Amigos
-            System.out.print("Número comensales .: ");
-            numAmigos = scn.nextInt();
-            scn.nextLine();
-            
-            // Pago por Comensal
-            pagoPersona = importeCena / numAmigos;
-
-            // Mensaje
-            System.out.printf(Locale.ENGLISH,
-                    "Pago por comensal .: %.2f€\n", pagoPersona);
+            System.out.print("Importe cena (€) .....: ");
+            importeCena = SCN.nextDouble();
         } catch (Exception e) {
-            System.out.println("Error de entrada");
-            scn.nextLine();
+            System.out.println("ERROR: Entrada incorrecta");
+        } finally {
+            SCN.nextLine();
         }
+
+        // Número de Comensales
+        int numComensales = 1;
+        try {
+            System.out.print("Número de comensales .: ");
+            numComensales = SCN.nextInt();
+        } catch (Exception e) {
+            System.out.println("ERROR: Entrada incorrecta");
+        } finally {
+            SCN.nextLine();
+        }
+
+        // Pago por Comensal
+        double pagoPersona = importeCena / numComensales;
+
+        // Mensaje
+        System.out.printf(Locale.ENGLISH,
+                "Pago por comensal ....: %.2f€%n", pagoPersona);
     }
 }
